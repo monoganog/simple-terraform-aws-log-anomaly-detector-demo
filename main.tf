@@ -19,15 +19,15 @@ provider "awscc" {
   region = var.aws_region
 }
 
-resource "awscc_logs_log_anomaly_detector" "my-anomaly-detector" {
-  log_group_arn_list    = [aws_cloudwatch_log_group.my-log-group.arn]
-  detector_name         = "example-detector"
-  evaluation_frequency  = "FIVE_MIN"  # Evaluate every 5 minutes
-}
-
 resource "aws_cloudwatch_log_group" "my-log-group" {
   name = "log-group-example"
   tags = {
     Environment = "dev"
   }
+}
+
+resource "awscc_logs_log_anomaly_detector" "my-anomaly-detector" {
+  log_group_arn_list    = [aws_cloudwatch_log_group.my-log-group.arn]
+  detector_name         = "example-detector"
+  evaluation_frequency  = "FIVE_MIN"
 }
